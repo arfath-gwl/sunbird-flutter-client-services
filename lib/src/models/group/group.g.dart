@@ -116,7 +116,7 @@ Map<String, dynamic> _$ActivitiesGroupedToJson(ActivitiesGrouped instance) =>
     <String, dynamic>{
       'title': instance.title,
       'count': instance.count,
-      'items': instance.items,
+      'items': instance.items?.map((e) => e?.toJson())?.toList(),
     };
 
 Group _$GroupFromJson(Map<String, dynamic> json) {
@@ -153,9 +153,10 @@ Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
       'createdBy': instance.createdBy,
       'updatedOn': instance.updatedOn,
       'updatedBy': instance.updatedBy,
-      'activities': instance.activities,
-      'activitiesGrouped': instance.activitiesGrouped,
-      'members': instance.members,
+      'activities': instance.activities?.map((e) => e?.toJson())?.toList(),
+      'activitiesGrouped':
+          instance.activitiesGrouped?.map((e) => e?.toJson())?.toList(),
+      'members': instance.members?.map((e) => e?.toJson())?.toList(),
       'name': instance.name,
       'description': instance.description,
       'id': instance.id,

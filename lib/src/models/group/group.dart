@@ -22,7 +22,7 @@ enum GroupMemberRole {
   MEMBER
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class GroupMember {
   @JsonKey(nullable: true)
   String createdOn;
@@ -46,7 +46,7 @@ class GroupMember {
   Map<String, dynamic> toJson() => _$GroupMemberToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class GroupActivity {
   @JsonKey(nullable: true)
   GroupEntityStatus status;
@@ -71,7 +71,7 @@ class GroupActivity {
   Map<String, dynamic> toJson() => _$GroupActivityToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class ActivitiesGrouped {
   String title;
   num count;
@@ -83,7 +83,7 @@ class ActivitiesGrouped {
   Map<String, dynamic> toJson() => _$ActivitiesGroupedToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Group {
   @JsonKey(nullable: true)
   GroupEntityStatus status;

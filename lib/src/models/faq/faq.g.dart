@@ -15,7 +15,7 @@ Faq _$FaqFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$FaqToJson(Faq instance) => <String, dynamic>{
-      'faqs': instance.faqs,
+      'faqs': instance.faqs?.map((e) => e?.toJson())?.toList(),
     };
 
 Faqs _$FaqsFromJson(Map<String, dynamic> json) {

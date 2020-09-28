@@ -3,7 +3,7 @@ import '../content/content.dart';
 
 part 'page.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Page {
   String name;
   String id;
@@ -15,7 +15,7 @@ class Page {
   Map<String, dynamic> toJson() => _$PageToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class PageSection {
   @JsonKey(nullable: true) String display;
   @JsonKey(nullable: true) String description;

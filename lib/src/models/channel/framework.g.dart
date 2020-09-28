@@ -32,7 +32,7 @@ Map<String, dynamic> _$FrameworkToJson(Framework instance) => <String, dynamic>{
       'name': instance.name,
       'identifier': instance.identifier,
       'objectType': instance.objectType,
-      'categories': instance.categories,
+      'categories': instance.categories?.map((e) => e?.toJson())?.toList(),
       'translations': instance.translations,
     };
 
@@ -54,7 +54,7 @@ FrameworkCategory _$FrameworkCategoryFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$FrameworkCategoryToJson(FrameworkCategory instance) =>
     <String, dynamic>{
-      'terms': instance.terms,
+      'terms': instance.terms?.map((e) => e?.toJson())?.toList(),
       'translations': instance.translations,
       'identifier': instance.identifier,
       'code': instance.code,
@@ -89,10 +89,10 @@ CategoryTerm _$CategoryTermFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$CategoryTermToJson(CategoryTerm instance) =>
     <String, dynamic>{
-      'associations': instance.associations,
+      'associations': instance.associations?.map((e) => e?.toJson())?.toList(),
       'description': instance.description,
       'translations': instance.translations,
-      'children': instance.children,
+      'children': instance.children?.map((e) => e?.toJson())?.toList(),
       'identifier': instance.identifier,
       'code': instance.code,
       'name': instance.name,
@@ -147,7 +147,7 @@ Channel _$ChannelFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$ChannelToJson(Channel instance) => <String, dynamic>{
-      'frameworks': instance.frameworks,
+      'frameworks': instance.frameworks?.map((e) => e?.toJson())?.toList(),
       'identifier': instance.identifier,
       'code': instance.code,
       'consumerId': instance.consumerId,

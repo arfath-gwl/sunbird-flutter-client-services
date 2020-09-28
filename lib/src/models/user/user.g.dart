@@ -39,13 +39,13 @@ User _$UserFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'lastName': instance.lastName,
-      'declarations': instance.declarations,
-      'externalIds': instance.externalIds,
+      'declarations': instance.declarations?.map((e) => e?.toJson())?.toList(),
+      'externalIds': instance.externalIds?.map((e) => e?.toJson())?.toList(),
       'id': instance.id,
       'userId': instance.userId,
       'identifier': instance.identifier,
       'firstName': instance.firstName,
-      'rootOrg': instance.rootOrg,
+      'rootOrg': instance.rootOrg?.toJson(),
       'tncAcceptedVersion': instance.tncAcceptedVersion,
       'tncAcceptedOn': instance.tncAcceptedOn,
       'tncLatestVersion': instance.tncLatestVersion,
@@ -185,7 +185,7 @@ Map<String, dynamic> _$FeedToJson(Feed instance) => <String, dynamic>{
       'channel': instance.channel,
       'status': instance.status,
       'expireOn': instance.expireOn,
-      'data': instance.data,
+      'data': instance.data?.toJson(),
     };
 
 FeedData _$FeedDataFromJson(Map<String, dynamic> json) {

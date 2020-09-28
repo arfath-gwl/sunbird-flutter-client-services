@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'framework.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Framework {
   @JsonKey(nullable: true) num index;
   @JsonKey(nullable: true) String code;
@@ -22,7 +22,7 @@ class Framework {
   Map<String, dynamic> toJson() => _$FrameworkToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class FrameworkCategory {
   @JsonKey(nullable: true) List<CategoryTerm> terms;
   @JsonKey(nullable: true) String translations;
@@ -41,7 +41,7 @@ class FrameworkCategory {
   Map<String, dynamic> toJson() => _$FrameworkCategoryToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class CategoryTerm {
   @JsonKey(nullable: true) List<CategoryAssociation> associations;
   @JsonKey(nullable: true) String description;
@@ -71,7 +71,7 @@ class CategoryTerm {
   Map<String, dynamic> toJson() => _$CategoryTermToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class CategoryAssociation {
   @JsonKey(nullable: true) String translations;
   @JsonKey(nullable: true) String description;
@@ -89,7 +89,7 @@ class CategoryAssociation {
   Map<String, dynamic> toJson() => _$CategoryAssociationToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Channel {
   @JsonKey(nullable: true) List<Framework> frameworks;
   String identifier;

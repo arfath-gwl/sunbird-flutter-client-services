@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'organisation.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Organisation {
   @JsonKey(nullable: true) String description;
   @JsonKey(nullable: true) String orgCode;

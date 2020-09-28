@@ -19,8 +19,8 @@ Profile _$ProfileFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{
-      'userDeclaredLocation': instance.userDeclaredLocation,
-      'ipLocation': instance.ipLocation,
+      'userDeclaredLocation': instance.userDeclaredLocation?.toJson(),
+      'ipLocation': instance.ipLocation?.toJson(),
     };
 
 UserDeclaredLocation _$UserDeclaredLocationFromJson(Map<String, dynamic> json) {

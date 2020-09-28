@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'user.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class User {
   @JsonKey(nullable: true) String lastName;
   @JsonKey(nullable: true) List<UserDeclaration> declarations;
@@ -46,7 +46,7 @@ class User {
   Map<String, dynamic> toJson() => _$UserToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class ExternalId {
   String id;
   String operation;
@@ -79,7 +79,7 @@ enum UserDeclarationStatus {
   ERROR
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class UserDeclaration {
   @JsonKey(nullable: true) String errorType;
   @JsonKey(nullable: true) UserDeclarationStatus status;
@@ -97,7 +97,7 @@ class UserDeclaration {
   Map<String, dynamic> toJson() => _$UserDeclarationToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class RootOrg {
   @JsonKey(nullable: true) String rootOrgId;
   @JsonKey(nullable: true) String orgName;
@@ -110,7 +110,7 @@ class RootOrg {
   Map<String, dynamic> toJson() => _$RootOrgToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Feed {
   String id;
   String userId;
@@ -130,7 +130,7 @@ class Feed {
   Map<String, dynamic> toJson() => _$FeedToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class FeedData {
   List<String> prospectChannels;
 

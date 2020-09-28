@@ -81,11 +81,11 @@ Content _$ContentFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$ContentToJson(Content instance) => <String, dynamic>{
-      'altMsg': instance.altMsg,
+      'altMsg': instance.altMsg?.map((e) => e?.toJson())?.toList(),
       'organisation': instance.organisation,
       'author': instance.author,
       'collaborators': instance.collaborators,
-      'originData': instance.originData,
+      'originData': instance.originData?.toJson(),
       'origin': instance.origin,
       'totalQuestions': instance.totalQuestions,
       'itemSetPreviewUrl': instance.itemSetPreviewUrl,
@@ -110,7 +110,7 @@ Map<String, dynamic> _$ContentToJson(Content instance) => <String, dynamic>{
       'copyright': instance.copyright,
       'copyrightYear': instance.copyrightYear,
       'license': instance.license,
-      'licenseDetails': instance.licenseDetails,
+      'licenseDetails': instance.licenseDetails?.toJson(),
       'expires': instance.expires,
       'downloadUrl': instance.downloadUrl,
       'variants': instance.variants,

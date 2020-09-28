@@ -29,7 +29,7 @@ Map<String, dynamic> _$FormToJson(Form instance) => <String, dynamic>{
       'action': instance.action,
       'component': instance.component,
       'framework': instance.framework,
-      'data': instance.data,
+      'data': instance.data?.toJson(),
       'created_on': instance.created_on,
       'rootOrgId': instance.rootOrgId,
     };

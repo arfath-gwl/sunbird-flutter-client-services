@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'form.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Form {
   @JsonKey(nullable: true) String last_modified_on;
 
@@ -30,7 +30,7 @@ class Form {
   Map<String, dynamic> toJson() => _$FormToJson(this);
 }
 
-@JsonSerializable(genericArgumentFactories: true)
+@JsonSerializable(explicitToJson: true)
 class FormData {
   List<dynamic> fields;
   String templateName;

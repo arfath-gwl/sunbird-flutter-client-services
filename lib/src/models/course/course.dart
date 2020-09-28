@@ -3,7 +3,7 @@ import '../content/content.dart';
 
 part 'course.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Batch {
   @JsonKey(nullable: true) CreatorDetails creatorDetails;
   @JsonKey(nullable: true) String enrollmentEndDate;
@@ -55,7 +55,7 @@ class Batch {
   Map<String, dynamic> toJson() => _$BatchToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class CreatorDetails {
   @JsonKey(nullable: true) String firstName;
   @JsonKey(nullable: true) String lastName;
@@ -66,7 +66,7 @@ class CreatorDetails {
   Map<String, dynamic> toJson() => _$CreatorDetailsToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class CourseCertificate {
   @JsonKey(nullable: true) String identifier;
   @JsonKey(nullable: true) String url;
@@ -82,7 +82,7 @@ class CourseCertificate {
   Map<String, dynamic> toJson() => _$CourseCertificateToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Course {
   @JsonKey(nullable: true) String dateTime;
   @JsonKey(nullable: true) String identifier;

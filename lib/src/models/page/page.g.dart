@@ -20,7 +20,7 @@ Page _$PageFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$PageToJson(Page instance) => <String, dynamic>{
       'name': instance.name,
       'id': instance.id,
-      'sections': instance.sections,
+      'sections': instance.sections?.map((e) => e?.toJson())?.toList(),
     };
 
 PageSection _$PageSectionFromJson(Map<String, dynamic> json) {
@@ -54,8 +54,8 @@ Map<String, dynamic> _$PageSectionToJson(PageSection instance) =>
       'description': instance.description,
       'alt': instance.alt,
       'imgUrl': instance.imgUrl,
-      'collections': instance.collections,
-      'contents': instance.contents,
+      'collections': instance.collections?.toJson(),
+      'contents': instance.contents?.map((e) => e?.toJson())?.toList(),
       'count': instance.count,
       'index': instance.index,
       'sectionDataType': instance.sectionDataType,

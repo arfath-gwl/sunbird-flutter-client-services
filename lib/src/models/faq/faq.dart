@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'faq.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Faq {
   List<Faq> faqs;
 
@@ -12,7 +12,7 @@ class Faq {
   Map<String, dynamic> toJson() => _$FaqToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Faqs {
   String topic;
   String description;

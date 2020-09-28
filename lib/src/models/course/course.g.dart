@@ -36,7 +36,7 @@ Batch _$BatchFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$BatchToJson(Batch instance) => <String, dynamic>{
-      'creatorDetails': instance.creatorDetails,
+      'creatorDetails': instance.creatorDetails?.toJson(),
       'enrollmentEndDate': instance.enrollmentEndDate,
       'identifier': instance.identifier,
       'id': instance.id,
@@ -149,7 +149,7 @@ Map<String, dynamic> _$CourseToJson(Course instance) => <String, dynamic>{
       'courseLogoUrl': instance.courseLogoUrl,
       'batchId': instance.batchId,
       'userId': instance.userId,
-      'content': instance.content,
+      'content': instance.content?.toJson(),
       'contentStatus': instance.contentStatus,
       'courseName': instance.courseName,
       'leafNodesCount': instance.leafNodesCount,
@@ -161,7 +161,8 @@ Map<String, dynamic> _$CourseToJson(Course instance) => <String, dynamic>{
       'contentsPlayedOffline': instance.contentsPlayedOffline,
       'batch': instance.batch,
       'completionPercentage': instance.completionPercentage,
-      'certificates': instance.certificates,
-      'issuedCertificates': instance.issuedCertificates,
-      'batches': instance.batches,
+      'certificates': instance.certificates?.map((e) => e?.toJson())?.toList(),
+      'issuedCertificates':
+          instance.issuedCertificates?.map((e) => e?.toJson())?.toList(),
+      'batches': instance.batches?.map((e) => e?.toJson())?.toList(),
     };

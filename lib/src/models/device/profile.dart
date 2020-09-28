@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'profile.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Profile {
   UserDeclaredLocation userDeclaredLocation;
   IPLocation ipLocation;
@@ -13,7 +13,7 @@ class Profile {
   Map<String, dynamic> toJson() => _$ProfileToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class UserDeclaredLocation {
   String state;
   String district;
@@ -24,7 +24,7 @@ class UserDeclaredLocation {
   Map<String, dynamic> toJson() => _$UserDeclaredLocationToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class IPLocation {
   String state;
   String district;

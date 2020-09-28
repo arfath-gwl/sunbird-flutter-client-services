@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'content.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Content {
   @JsonKey(nullable: true) List<AltMsg> altMsg;
   @JsonKey(nullable: true) String organisation;
@@ -135,7 +135,7 @@ class Content {
   Map<String, dynamic> toJson() => _$ContentToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class LicenseDetails {
   String description;
   String name;
@@ -147,7 +147,7 @@ class LicenseDetails {
   Map<String, dynamic> toJson() => _$LicenseDetailsToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class AltMsg {
   String key;
   String value;
@@ -159,7 +159,7 @@ class AltMsg {
   Map<String, dynamic> toJson() => _$AltMsgToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class OriginData {
   String name;
   String author;
