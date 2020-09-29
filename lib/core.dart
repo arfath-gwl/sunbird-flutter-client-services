@@ -25,8 +25,18 @@ abstract class CsCoreConfig {
   CsCoreApiConfig api;
 }
 
+abstract class CsServicesConfig {
+  CsFrameworkServiceConfig frameworkServiceConfig;
+}
+
 abstract class CsConfig {
   CsCoreConfig core;
+  CsServicesConfig services;
+}
+
+abstract class CsFrameworkServiceConfig {
+  String frameworkApiPath;
+  String channelApiPath;
 }
 
 class CsModule {
