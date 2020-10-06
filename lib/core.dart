@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:sunbird_flutter_client_services/src/core/http_service/interface/cs_http_service.dart';
+import 'package:sunbird_flutter_client_services/src/services/framework/implementation/framework_service_impl.dart';
 
 import 'src/core/http_service/implementation/http-service-impl.dart';
+import 'src/services/framework/interface/cs_framework_service.dart';
 
 class CsCoreGlobalConfig {
   String channelId;
@@ -77,15 +79,23 @@ class CsModule {
     _container = KiwiContainer();
 
     _isInitialised = true;
+
+    updateConfig(csConfig);
   }
 
   updateConfig(CsConfig csConfig) {
     _csConfig = csConfig;
     _container
         .registerSingleton<CsHttpService>((c) => HttpServiceImpl(_csConfig));
+    _container.registerSingleton<CsFrameworkService>(
+        (c) => FrameworkServiceImpl(_csConfig, c.resolve<CsHttpService>()));
   }
 
   CsHttpService get httpService {
     return _container.resolve<CsHttpService>();
+  }
+
+  CsFrameworkService get frameworkService {
+    return _container.resolve<CsFrameworkService>();
   }
 }

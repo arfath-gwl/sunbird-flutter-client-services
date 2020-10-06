@@ -52,7 +52,9 @@ class HttpServiceImpl implements CsHttpService {
       return _interceptRequest(request).asStream();
     }).flatMap<CsResponse>((event) {
       var uri = Uri.https(
-          (request.host ?? this.host), request.path, request.parameters);
+          (request.host ?? this.host).replaceFirst("https://", ""),
+          request.path,
+          request.parameters);
 
       switch (request.type) {
         case CsHttpRequestType.GET:
