@@ -3,6 +3,7 @@ import '../../../../models.dart';
 import '../../../core/http_service/interface/cs_http_service.dart';
 import '../../../core/http_service/interface/cs_request.dart';
 import '../interface/cs_framework_service.dart';
+import 'utils/framework_mapper.dart';
 
 class FrameworkServiceImpl implements CsFrameworkService {
   CsConfig _csConfig;
@@ -11,7 +12,7 @@ class FrameworkServiceImpl implements CsFrameworkService {
   FrameworkServiceImpl(this._csConfig, this._httpService);
 
   @override
-  Stream<Framework> getFramework(String id,
+  Future<Framework> getFramework(String id,
       [GetFrameworkOptions options, CsFrameworkServiceConfig config]) {
     CsRequest apiRequest = CsRequestBuilder()
         .withType(CsHttpRequestType.GET)
@@ -30,16 +31,18 @@ class FrameworkServiceImpl implements CsFrameworkService {
         ._httpService
         .fetch(apiRequest)
         .map((response) => response.body["result"]["framework"])
-        .map((dynamic json) => Framework.fromJson(json));
+        .map((dynamic json) => Framework.fromJson(json))
+        .last;
   }
 
   @override
-  Stream<Channel> getChannel(String id, [CsFrameworkServiceConfig config]) {
+  Future<Channel> getChannel(String id, [CsFrameworkServiceConfig config]) {
     CsRequest apiRequest = CsRequestBuilder()
         .withType(CsHttpRequestType.GET)
         .withPath(
-          "${(config?.channelApiPath ?? _csConfig.services.frameworkServiceConfig?.channelApiPath)}/read/$id",
-        )
+      "${(config?.channelApiPath ??
+          _csConfig.services.frameworkServiceConfig?.channelApiPath)}/read/$id",
+    )
         .withBearerToken(true)
         .build();
 
@@ -47,6 +50,61 @@ class FrameworkServiceImpl implements CsFrameworkService {
         ._httpService
         .fetch(apiRequest)
         .map((response) => response.body["result"]["channel"])
-        .map((dynamic json) => Channel.fromJson(json));
+        .map((dynamic json) => Channel.fromJson(json))
+        .last;
+  }
+
+  @override
+  Future<List<Framework>> getChannelSuggestedFrameworkList(Channel channel,
+      [getFrameworkOptions = const GetFrameworkOptions([])]) async {
+    if (channel.frameworks != null) {
+      return channel.frameworks
+          .map(FrameworkMapper.prepareFrameworkCategoryAssociations);
+    }
+
+    final defaultFramework =
+    await getFramework(channel.defaultFramework, getFrameworkOptions)
+        .then((f) {
+      f.index = 0;
+      return f;
+    });
+
+    return [defaultFramework];
+  }
+
+  @override
+  Future<List<CategoryTerm>> getFrameworkCategoryTerms(Framework framework,
+      String currentCategoryCode, [
+        String previousCategoryCode,
+        List<String> selectedTermsCodes,
+      ]) async {
+    var terms = [];
+
+    if (previousCategoryCode == null) {
+      terms = framework.categories
+          .firstWhere((c) => c.code == currentCategoryCode)
+          .terms ??
+          [];
+    } else {
+      final previousCategorySelectedTerms = (framework.categories
+          .firstWhere((c) => c.code == previousCategoryCode)
+          .terms ??
+          [])
+          .where((t) => selectedTermsCodes.contains(t.code));
+
+      final currentCategoryTerms = framework.categories
+          .firstWhere((c) => c.code == currentCategoryCode)
+          .terms ??
+          [];
+
+      return currentCategoryTerms.where((ct) =>
+      previousCategorySelectedTerms.firstWhere((pt) =>
+      pt.associations.firstWhere((a) =>
+      a.category == currentCategoryCode && a.code == ct.code) !=
+          null) != null
+      );
+    }
+
+    return terms;
   }
 }

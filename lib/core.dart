@@ -1,42 +1,59 @@
+import 'package:flutter/foundation.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:sunbird_flutter_client_services/src/core/http_service/interface/cs_http_service.dart';
 
 import 'src/core/http_service/implementation/http-service-impl.dart';
 
-abstract class CsCoreGlobalConfig {
+class CsCoreGlobalConfig {
   String channelId;
   String producerId;
   String deviceId;
+
+  CsCoreGlobalConfig({this.channelId, this.producerId, this.deviceId});
 }
 
-abstract class CsCoreApiAuthenticationConfig {
+class CsCoreApiAuthenticationConfig {
   String userToken;
   String managedUserToken;
   String bearerToken;
+
+  CsCoreApiAuthenticationConfig(
+      {this.userToken, this.managedUserToken, this.bearerToken});
 }
 
-abstract class CsCoreApiConfig {
+class CsCoreApiConfig {
   String host;
   CsCoreApiAuthenticationConfig authentication;
+
+  CsCoreApiConfig({@required this.host, @required this.authentication});
 }
 
-abstract class CsCoreConfig {
+class CsCoreConfig {
   CsCoreGlobalConfig global;
   CsCoreApiConfig api;
+
+  CsCoreConfig({@required this.global, @required this.api});
 }
 
-abstract class CsServicesConfig {
+class CsServicesConfig {
   CsFrameworkServiceConfig frameworkServiceConfig;
+
+  CsServicesConfig({this.frameworkServiceConfig});
 }
 
-abstract class CsConfig {
-  CsCoreConfig core;
-  CsServicesConfig services;
-}
-
-abstract class CsFrameworkServiceConfig {
+class CsFrameworkServiceConfig {
   String frameworkApiPath;
   String channelApiPath;
+
+  CsFrameworkServiceConfig(
+      {@required this.frameworkApiPath, @required this.channelApiPath});
+}
+
+class CsConfig {
+  CsCoreConfig core;
+  CsServicesConfig services;
+
+  CsConfig({@required this.core, @required this.services});
 }
 
 class CsModule {
