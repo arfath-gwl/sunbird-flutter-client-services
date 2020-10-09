@@ -85,10 +85,13 @@ class CsModule {
 
   updateConfig(CsConfig csConfig) {
     _csConfig = csConfig;
-    _container
-        .registerSingleton<CsHttpService>((c) => HttpServiceImpl(_csConfig));
-    _container.registerSingleton<CsFrameworkService>(
-        (c) => FrameworkServiceImpl(_csConfig, c.resolve<CsHttpService>()));
+
+    try {
+      _container
+          .registerSingleton<CsHttpService>((c) => HttpServiceImpl(_csConfig));
+      _container.registerSingleton<CsFrameworkService>(
+          (c) => FrameworkServiceImpl(_csConfig, c.resolve<CsHttpService>()));
+    } catch (e) {}
   }
 
   CsHttpService get httpService {

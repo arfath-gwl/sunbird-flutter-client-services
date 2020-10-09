@@ -20,10 +20,11 @@ class FrameworkServiceImpl implements CsFrameworkService {
           "${(config?.frameworkApiPath ?? _csConfig.services.frameworkServiceConfig?.frameworkApiPath)}/read/$id",
         )
         .withParameters(
-          options?.requiredCategories != null
-              ? {'categories': options.requiredCategories.join(',')}
-              : {},
-        )
+      options?.requiredCategories != null
+          ? Map<String, String>.from(
+          {'categories': options.requiredCategories.join(',')})
+          : Map<String, String>.from({}),
+    )
         .withBearerToken(true)
         .build();
 
@@ -59,7 +60,7 @@ class FrameworkServiceImpl implements CsFrameworkService {
       [getFrameworkOptions = const GetFrameworkOptions([])]) async {
     if (channel.frameworks != null) {
       return channel.frameworks
-          .map(FrameworkMapper.prepareFrameworkCategoryAssociations);
+          .map(FrameworkMapper.prepareFrameworkCategoryAssociations).toList();
     }
 
     final defaultFramework =
@@ -86,23 +87,24 @@ class FrameworkServiceImpl implements CsFrameworkService {
           .terms ??
           [];
     } else {
-      final previousCategorySelectedTerms = (framework.categories
-          .firstWhere((c) => c.code == previousCategoryCode)
-          .terms ??
-          [])
-          .where((t) => selectedTermsCodes.contains(t.code));
+      final previousCategorySelectedTerms = (
+          framework.categories
+              .firstWhere((c) => c.code == previousCategoryCode)
+              ?.terms ?? []
+      ).where((t) => selectedTermsCodes.contains(t.code)).toList();
 
       final currentCategoryTerms = framework.categories
           .firstWhere((c) => c.code == currentCategoryCode)
-          .terms ??
+          ?.terms ??
           [];
 
-      return currentCategoryTerms.where((ct) =>
-      previousCategorySelectedTerms.firstWhere((pt) =>
-      pt.associations.firstWhere((a) =>
-      a.category == currentCategoryCode && a.code == ct.code) !=
-          null) != null
-      );
+      return currentCategoryTerms.where((ct) {
+        return previousCategorySelectedTerms.firstWhere((pt) {
+          return pt.associations.firstWhere((a) {
+            return a.category == currentCategoryCode && a.code == ct.code;
+          }, orElse: () => null) != null;
+        }, orElse: () => null) != null;
+      }).toList();
     }
 
     return terms;
